@@ -1,0 +1,8 @@
+<launch>
+  <node name="scan_matcher" pkg="laser_scan_matcher" type="laser_scan_matcher_node">
+    <param name="fixed_frame" type="string" value="odom"/>
+    <param name="use_imu" type="bool" value="false"/>
+    <param name="use_odom" type="bool" value="false"/>
+    <param name="use_vel" type="bool" value="false"/>
+  </node>
+</launch>
