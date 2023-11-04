@@ -9,7 +9,8 @@
 
   <node pkg="theclaw" type="theclaw_node.py" name="theclaw" />
   <!-- <include file="$(find theclaw)/launch/lidar.launch" /> -->
+  <include file="$(find theclaw)/launch/scan_matcher.launch" />
   <!-- <include file="$(find theclaw)/launch/nav.launch" /> -->
-  <!-- <include file="$(find theclaw)/launch/slam.launch" /> -->
+  <include file="$(find theclaw)/launch/slam.launch" />
   <include file="$(find theclaw)/launch/rviz.launch" />
 </launch>
