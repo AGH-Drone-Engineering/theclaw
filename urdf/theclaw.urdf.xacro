@@ -9,7 +9,7 @@
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
-        <origin xyz="0.0 0.0 0.0" rpy=" 0 0 0"/>
+        <origin xyz="0.0 0.0 0.025" rpy=" 0 0 0"/>
     </joint>
 
     <!-- Base -->
@@ -24,23 +24,19 @@
         <collision>
             <origin rpy="0 0 ${pi/2}"/>
             <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Platform.stl" scale="${model_scale}"/>
+                <cylinder radius="0.060" length="0.02" /> 
             </geometry>
         </collision>
-        <inertial>
+        <xacro:inertial_cylinder mass="0.200" radius="0.060" length="0.02">
             <origin rpy="0 0 ${pi/2}"/>
-            <mass value="0.100"/>
-            <inertia ixx="1.17545509e-04" ixy="-2.22398736e-12" ixz="6.88895872e-13"
-                     iyy="1.00073449e-04" iyz="-4.90557377e-07"
-                     izz="2.10087193e-04" />
-        </inertial>
+        </xacro:inertial_cylinder>
     </link>
 
     <!-- Camera -->
 
     <link name="camera_link">
         <inertial>
-            <mass value="0.1" />
+            <mass value="0.01" />
             <origin rpy="0 0 0" xyz="0 0 0" />
             <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
         </inertial>
@@ -67,7 +63,7 @@
                 <cylinder radius="${0.076/2}" length="0.0186" />
             </geometry>
         </visual>
-        <xacro:inertial_cylinder mass="0.1" radius="${0.076/2}" length="0.0186">
+        <xacro:inertial_cylinder mass="0.050" radius="${0.076/2}" length="0.0186">
             <origin rpy="0 0 0" xyz="0 0 ${0.0186/2}" />
         </xacro:inertial_cylinder>
     </link>
@@ -79,7 +75,7 @@
                 <cylinder radius="${0.0725/2}" length="${0.041-0.0196}"/>
             </geometry>
         </visual>
-        <xacro:inertial_cylinder mass="0.1" radius="${0.0725/2}" length="${0.041-0.0196}">
+        <xacro:inertial_cylinder mass="0.050" radius="${0.0725/2}" length="${0.041-0.0196}">
             <origin rpy="0 0 0" xyz="0 0 ${0.0186/2}" />
         </xacro:inertial_cylinder>
     </link>
@@ -98,87 +94,40 @@
 
     <!-- Wheels !-->
 
-    <link name="wheel1">
-        <visual>
-            <origin rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
-            </geometry>
-        </visual>
-        <collision>
-        <origin rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <origin rpy="0 ${pi/2} 0"/>
-            <mass value="0.020"/>
-            <inertia ixx="4.05491236e-06" ixy="-2.30614871e-09" ixz="-3.59024381e-09"
-                     iyy="4.05452187e-06" iyz="2.37778687e-09"
-                     izz="5.84593279e-06" />
-        </inertial>
-    </link>
+    <xacro:macro name="wheel" params="name *origin">
+        <link name="${name}_link">
+            <visual>
+                <origin rpy="0 ${pi/2} 0"/>
+                <geometry>
+                    <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin rpy="0 ${pi/2} 0"/>
+                <geometry>
+                    <cylinder radius="0.025" length="0.025" /> 
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="0.020" radius="0.025" length="0.025">
+                <origin rpy="0 ${pi/2} 0"/>
+            </xacro:inertial_cylinder>
+        </link>
+        <joint name="${name}_joint" type="continuous">
+            <xacro:insert_block name="origin" />
+            <parent link="base_link"/>
+            <child link="${name}_link"/>
+        </joint>
+    </xacro:macro>
 
-    <link name="wheel2">
-        <visual>
-            <origin rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
-            </geometry>
-        </visual>
-        <collision>
-           <origin rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <origin rpy="0 ${pi/2} 0"/>
-            <mass value="0.020"/>
-            <inertia ixx="4.05491236e-06" ixy="-2.30614871e-09" ixz="-3.59024381e-09"
-                     iyy="4.05452187e-06" iyz="2.37778687e-09"
-                     izz="5.84593279e-06" />
-        </inertial>
-    </link>
-
-    <link name="wheel3">
-        <visual>
-            <origin rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
-            </geometry>
-        </visual>
-        <collision>
-            <origin rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <origin rpy="0 ${pi/2} 0"/>
-            <mass value="0.020"/>
-            <inertia ixx="4.05491236e-06" ixy="-2.30614871e-09" ixz="-3.59024381e-09"
-                     iyy="4.05452187e-06" iyz="2.37778687e-09"
-                     izz="5.84593279e-06" />
-        </inertial>
-    </link>
-
-    <joint name="wheel1_axis" type="continuous">
+    <xacro:wheel name="wheel1">
         <origin xyz="0.077647 0 0" rpy="0 0 0"/>
-        <parent link="base_link"/>
-        <child link="wheel1"/>
-    </joint>
+    </xacro:wheel>
 
-    <joint name="wheel2_axis" type="continuous">
+    <xacro:wheel name="wheel2">
         <origin xyz="${cos(2*pi/3)*0.077647 - sin(2*pi/3)*0} ${sin(2*pi/3)*0.077647 + cos(2*pi/3)*0} 0" rpy="0 0 ${2*pi/3}"/>
-        <parent link="base_link"/>
-        <child link="wheel2"/>
-    </joint>
+    </xacro:wheel>
 
-    <joint name="wheel3_axis" type="continuous">
+    <xacro:wheel name="wheel3">
         <origin xyz="${cos(2*pi/3*2)*0.077647 - sin(2*pi/3*2)*0} ${sin(2*pi/3*2)*0.077647 + cos(2*pi/3*2)*0} 0" rpy="0 0 ${2*pi/3*2}"/>
-        <parent link="base_link"/>
-        <child link="wheel3"/>
-    </joint>
+    </xacro:wheel>
 </robot>
