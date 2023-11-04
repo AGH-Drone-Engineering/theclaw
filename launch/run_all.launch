@@ -13,4 +13,5 @@
   <include file="$(find theclaw)/launch/nav.launch" />
   <include file="$(find theclaw)/launch/slam.launch" />
   <include file="$(find theclaw)/launch/rviz.launch" />
+  <include file="$(find theclaw)/launch/joystick.launch" />
 </launch>
