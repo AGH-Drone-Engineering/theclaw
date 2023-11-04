@@ -2,6 +2,16 @@
 
 <robot name="xacro_properties" xmlns:xacro="http://ros.org/wiki/xacro">
 
+    <xacro:macro name="inertial_cylinder" params="mass radius length *origin">
+        <inertial>
+            <xacro:insert_block name="origin" />
+            <mass value="${mass}" />
+            <inertia ixx="${1/12*mass*(3*radius*radius+length*length)}" ixy="0.0" ixz="0.0"
+                     iyy="${1/12*mass*(3*radius*radius+length*length)}" iyz="0.0"
+                     izz="${0.5*mass*radius*radius}" />
+        </inertial>
+    </xacro:macro>
+
   <material name="black">
       <color rgba="0.0 0.0 0.0 1.0"/>
   </material>
