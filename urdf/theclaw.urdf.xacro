@@ -116,7 +116,7 @@
             <xacro:insert_block name="origin" />
             <parent link="base_link"/>
             <child link="${name}_link"/>
-            <limit velocity="2" effort="0.01"/>
+            <limit velocity="4" effort="1"/>
         </joint>
         <transmission name="${name}_tran">
             <type>transmission_interface/SimpleTransmission</type>
