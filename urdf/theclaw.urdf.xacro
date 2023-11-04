@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="theclaw">
+    <xacro:include filename="$(find theclaw)/urdf/common_properties.xacro"/>
+    <xacro:include filename="$(find theclaw)/urdf/theclaw.gazebo.xacro"/>
+    <xacro:property name="model_scale" value="0.01 0.01 0.01" />
+
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.0" rpy=" 0 0 0"/>
+    </joint>
+
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 ${pi/2}"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Platform.stl" scale="${model_scale}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 ${pi/2}"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Platform.stl" scale="${model_scale}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 ${pi/2}"/>
+            <mass value="0.100"/>
+            <inertia ixx="1.17545509e-04" ixy="-2.22398736e-12" ixz="6.88895872e-13"
+                     iyy="1.00073449e-04" iyz="-4.90557377e-07"
+                     izz="2.10087193e-04" />
+        </inertial>
+    </link>
+
+    <link name="camera_link">
+        <inertial>
+            <mass value="0.1" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        </inertial>
+        <visual>
+            <origin rpy="0  0  0" xyz="0  0  0" />
+            <geometry>
+                <box size="0.005 0.05 0.05" />
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="camera_link" />
+        <origin rpy="0 0.25 0" xyz="0.055 0 0.0857" />
+    </joint>
+
+    <!-- Wheels !-->
+
+    <link name="wheel1">
+        <visual>
+            <origin rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+            </geometry>
+        </visual>
+        <collision>
+        <origin rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin rpy="0 ${pi/2} 0"/>
+            <mass value="0.020"/>
+            <inertia ixx="4.05491236e-06" ixy="-2.30614871e-09" ixz="-3.59024381e-09"
+                     iyy="4.05452187e-06" iyz="2.37778687e-09"
+                     izz="5.84593279e-06" />
+        </inertial>
+    </link>
+
+    <link name="wheel2">
+        <visual>
+            <origin rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+            </geometry>
+        </visual>
+        <collision>
+           <origin rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin rpy="0 ${pi/2} 0"/>
+            <mass value="0.020"/>
+            <inertia ixx="4.05491236e-06" ixy="-2.30614871e-09" ixz="-3.59024381e-09"
+                     iyy="4.05452187e-06" iyz="2.37778687e-09"
+                     izz="5.84593279e-06" />
+        </inertial>
+    </link>
+
+    <link name="wheel3">
+        <visual>
+            <origin rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://theclaw/urdf/meshes/Omniwheel.stl" scale="${model_scale}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin rpy="0 ${pi/2} 0"/>
+            <mass value="0.020"/>
+            <inertia ixx="4.05491236e-06" ixy="-2.30614871e-09" ixz="-3.59024381e-09"
+                     iyy="4.05452187e-06" iyz="2.37778687e-09"
+                     izz="5.84593279e-06" />
+        </inertial>
+    </link>
+
+    <joint name="wheel1_axis" type="continuous">
+        <origin xyz="0.077647 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="wheel1"/>
+    </joint>
+
+    <joint name="wheel2_axis" type="continuous">
+        <origin xyz="${cos(2*pi/3)*0.077647 - sin(2*pi/3)*0} ${sin(2*pi/3)*0.077647 + cos(2*pi/3)*0} 0" rpy="0 0 ${2*pi/3}"/>
+        <parent link="base_link"/>
+        <child link="wheel2"/>
+    </joint>
+
+    <joint name="wheel3_axis" type="continuous">
+        <origin xyz="${cos(2*pi/3*2)*0.077647 - sin(2*pi/3*2)*0} ${sin(2*pi/3*2)*0.077647 + cos(2*pi/3*2)*0} 0" rpy="0 0 ${2*pi/3*2}"/>
+        <parent link="base_link"/>
+        <child link="wheel3"/>
+    </joint>
+</robot>
