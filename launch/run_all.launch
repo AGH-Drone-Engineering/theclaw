@@ -1,11 +1,11 @@
 <launch>
   <include file="$(find theclaw)/launch/robot.launch" />
 
-   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find theclaw)/world/test.world"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world"/>
   </include>
 
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model theclaw -x 0 -y 0 -z 1 -param robot_description" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model theclaw -x -0.2 -y 0 -z 0.1 -param robot_description" />
 
   <node pkg="theclaw" type="theclaw_node.py" name="theclaw" />
   <!-- <include file="$(find theclaw)/launch/lidar.launch" /> -->
