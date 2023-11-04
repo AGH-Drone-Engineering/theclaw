@@ -88,4 +88,10 @@
       </plugin>
     </sensor>
   </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/theclaw</robotNamespace>
+    </plugin>
+  </gazebo>
 </robot>

@@ -1,5 +1,11 @@
 <launch>
     <param name="robot_description" command="xacro --inorder '$(find theclaw)/urdf/theclaw.urdf.xacro'"/>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+    <rosparam file="$(find theclaw)/config/theclaw_control.yaml" command="load"/>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" ns="/theclaw" args="wheel1_controller wheel2_controller wheel3_controller joint_state_controller"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <remap from="/joint_states" to="/theclaw/joint_states" />
+    </node>
 </launch>
