@@ -1,14 +1,19 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omniplatform">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="theclaw">
     <xacro:property name="model_scale" value="0.01 0.01 0.01" />
 
     <link name="base_link">
         <visual>
             <origin rpy="0 0 ${pi/2}"/>
             <geometry>
-                <mesh filename="package://omniplatform/urdf/model/Platform.stl" scale="${model_scale}"/>
+                <mesh filename="package://theclaw/urdf/model/Platform.stl" scale="${model_scale}"/>
             </geometry>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.6" radius="0.2"/>
+            </geometry>
+        </collision>
     </link>
 
     <!-- Wheels !-->
@@ -17,7 +22,7 @@
         <visual>
             <origin rpy="0 ${pi/2} 0"/>
             <geometry>
-                <mesh filename="package://omniplatform/urdf/model/Omniwheel.stl" scale="${model_scale}"/>
+                <mesh filename="package://theclaw/urdf/model/Omniwheel.stl" scale="${model_scale}"/>
             </geometry>
             <material name="wheel_material">
                 <color rgba="0 1 0.3 1"/>
@@ -29,7 +34,7 @@
         <visual>
             <origin rpy="0 ${pi/2} 0"/>
             <geometry>
-                <mesh filename="package://omniplatform/urdf/model/Omniwheel.stl" scale="${model_scale}"/>
+                <mesh filename="package://theclaw/urdf/model/Omniwheel.stl" scale="${model_scale}"/>
             </geometry>
             <material name="wheel_material">
                 <color rgba="0 1 0.3 1"/>
@@ -41,7 +46,7 @@
         <visual>
             <origin rpy="0 ${pi/2} 0"/>
             <geometry>
-                <mesh filename="package://omniplatform/urdf/model/Omniwheel.stl" scale="${model_scale}"/>
+                <mesh filename="package://theclaw/urdf/model/Omniwheel.stl" scale="${model_scale}"/>
             </geometry>
             <material name="wheel_material">
                 <color rgba="0 1 0.3 1"/>
