@@ -4,6 +4,11 @@
     <param name="use_imu" type="bool" value="true"/>
     <param name="use_odom" type="bool" value="false"/>
     <param name="use_vel" type="bool" value="false"/>
+    <param name="publish_tf" type="bool" value="false" />
+    <param name="publish_pose" type="bool" value="false" />
+    <param name="publish_pose_stamped" type="bool" value="true" />
+    <param name="restart" type="bool" value="true" />
     <remap from="imu/data" to="/imu" />
+    <remap from="pose_stamped" to="/scan_matcher/pose" />
   </node>
 </launch>

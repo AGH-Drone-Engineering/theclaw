@@ -116,15 +116,15 @@
             <xacro:insert_block name="origin" />
             <parent link="base_link"/>
             <child link="${name}_link"/>
-            <limit velocity="2" effort="1"/>
+            <limit velocity="10.0" effort="1.0"/>
         </joint>
         <transmission name="${name}_tran">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="${name}_joint">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
             </joint>
             <actuator name="${name}_motor">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
         </transmission>

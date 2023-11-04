@@ -6,13 +6,13 @@ theclaw:
 
   # Wheel Controllers ---------------------------------------
   wheel1_controller:
-    type: effort_controllers/JointEffortController
+    type: velocity_controllers/JointVelocityController
     joint: wheel1_joint
 
   wheel2_controller:
-    type: effort_controllers/JointEffortController
+    type: velocity_controllers/JointVelocityController
     joint: wheel2_joint
 
   wheel3_controller:
-    type: effort_controllers/JointEffortController
+    type: velocity_controllers/JointVelocityController
     joint: wheel3_joint
