@@ -28,6 +28,7 @@
   <exec_depend>rviz</exec_depend>
   <exec_depend>laser_scan_matcher</exec_depend>
   <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
 
   <export>
   </export>
