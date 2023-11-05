@@ -1,0 +1,46 @@
+<launch>
+  <param name="robot_description" command="xacro '$(find theclaw)/urdf/theclaw.urdf.xacro'"/>
+
+  <rosparam file="$(find theclaw)/config/theclaw_control.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" ns="/theclaw" args="wheel1_controller wheel2_controller wheel3_controller joint_state_controller"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <remap from="/joint_states" to="/theclaw/joint_states" />
+  </node>
+
+  <node ns="motor_a" pkg="omniwheel" type="omniwheel_node" name="controller">
+    <remap from="cmd_vel" to="/cmd_vel"/>
+    <remap from="command/int" to="motor_speed"/>
+    <remap from="command/float" to="/theclaw/wheel1_controller/command"/>
+    <param name="wheel_id" type="int" value="1"/>
+  </node>
+
+  <node ns="motor_b" pkg="omniwheel" type="omniwheel_node" name="controller">
+    <remap from="cmd_vel" to="/cmd_vel"/>
+    <remap from="command/int" to="motor_speed"/>
+    <remap from="command/float" to="/theclaw/wheel2_controller/command"/>
+    <param name="wheel_id" type="int" value="2"/>
+  </node>
+
+  <node ns="motor_c" pkg="omniwheel" type="omniwheel_node" name="controller">
+    <remap from="cmd_vel" to="/cmd_vel"/>
+    <remap from="command/int" to="motor_speed"/>
+    <remap from="command/float" to="/theclaw/wheel3_controller/command"/>
+    <param name="wheel_id" type="int" value="3"/>
+  </node>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world"/>
+  </include>
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model theclaw -x -0.3 -y 0 -z 0.1 -param robot_description" />
+
+  <!-- <node pkg="theclaw" type="theclaw_node.py" name="theclaw" /> -->
+  <!-- <include file="$(find theclaw)/launch/lidar.launch" /> -->
+  <!-- <include file="$(find theclaw)/launch/scan_matcher.launch" /> -->
+  <include file="$(find theclaw)/launch/nav.launch" />
+  <include file="$(find theclaw)/launch/slam.launch" />
+  <include file="$(find theclaw)/launch/rviz.launch" />
+  <!-- <include file="$(find theclaw)/launch/joystick.launch" /> -->
+</launch>

@@ -70,7 +70,7 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        odom:
+        scanmatcher_frame:
           Value: true
         wheel1_link:
           Value: true
@@ -88,19 +88,20 @@ Visualization Manager:
         base_footprint:
           {}
         map:
-          odom:
-            base_link:
-              camera_link:
+          base_link:
+            camera_link:
+              {}
+            laser_base:
+              laser_head:
                 {}
-              laser_base:
-                laser_head:
-                  {}
-              wheel1_link:
-                {}
-              wheel2_link:
-                {}
-              wheel3_link:
-                {}
+            wheel1_link:
+              {}
+            wheel2_link:
+              {}
+            wheel3_link:
+              {}
+          scanmatcher_frame:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -302,7 +303,7 @@ Visualization Manager:
       Axes Radius: 0.10000000149011612
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Pose
@@ -312,7 +313,7 @@ Visualization Manager:
       Shape: Arrow
       Topic: /move_base/current_goal
       Unreliable: false
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -340,8 +341,8 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 3.6518588066101074
+      Class: rviz/ThirdPersonFollower
+      Distance: 6.25840425491333
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -349,17 +350,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0
-        Y: 0
+        X: -0.9754085540771484
+        Y: 1.1972905397415161
         Z: 0
-      Focal Shape Fixed Size: true
+      Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8303982019424438
+      Pitch: 0.8053988218307495
       Target Frame: <Fixed Frame>
-      Yaw: 0.6403985023498535
+      Yaw: 1.9054042100906372
     Saved: ~
 Window Geometry:
   Displays:
