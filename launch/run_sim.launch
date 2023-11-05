@@ -1,16 +1,16 @@
 <launch>
-  <param name="robot_description" command="xacro '$(find theclaw)/urdf/theclaw.urdf.xacro'"/>
+  <param name="robot_description" command="xacro '$(find theclaw)/urdf/theclaw.urdf.xacro'" />
 
-  <!-- <rosparam file="$(find theclaw)/config/theclaw_control.yaml" command="load"/> -->
+  <rosparam file="$(find theclaw)/config/theclaw_control.yaml" command="load" />
 
-  <!-- <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" ns="/theclaw" args="wheel1_controller wheel2_controller wheel3_controller joint_state_controller"/> -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" ns="/theclaw" args="wheel_left_controller wheel_right_controller joint_state_controller" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
       <remap from="/joint_states" to="/theclaw/joint_states" />
   </node>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world"/>
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world" />
   </include>
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model theclaw -x -0.3 -y 0 -z 0.1 -param robot_description" />

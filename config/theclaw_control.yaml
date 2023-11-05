@@ -5,14 +5,10 @@ theclaw:
     publish_rate: 50  
 
   # Wheel Controllers ---------------------------------------
-  wheel1_controller:
+  wheel_right_controller:
     type: velocity_controllers/JointVelocityController
-    joint: wheel1_joint
+    joint: wheel_left_joint
 
-  wheel2_controller:
+  wheel_left_controller:
     type: velocity_controllers/JointVelocityController
-    joint: wheel2_joint
-
-  wheel3_controller:
-    type: velocity_controllers/JointVelocityController
-    joint: wheel3_joint
+    joint: wheel_right_joint
