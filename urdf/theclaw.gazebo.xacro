@@ -23,18 +23,14 @@
     </sensor>
   </gazebo>
 
-  <gazebo reference="wheel1">
-    <material>Gazebo/White</material>
+  <gazebo reference="wheel_left_link">
+    <material>Gazebo/Grass</material>
   </gazebo>
 
-  <gazebo reference="wheel2">
-    <material>Gazebo/White</material>
+  <gazebo reference="wheel_right_link">
+    <material>Gazebo/Grass</material>
   </gazebo>
 
-  <gazebo reference="wheel3">
-    <material>Gazebo/White</material>
-  </gazebo>
- 
   <gazebo reference="camera_link">
     <material>Gazebo/Green</material>
     <sensor type="camera" name="camera1">
@@ -42,13 +38,13 @@
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
-          <width>800</width>
-          <height>800</height>
+          <width>640</width>
+          <height>640</height>
           <format>R8G8B8</format>
         </image>
         <clip>
           <near>0.02</near>
-          <far>300</far>
+          <far>100</far>
         </clip>
         <noise>
           <type>gaussian</type>
@@ -76,7 +72,7 @@
     </sensor>
   </gazebo>
 
-  <gazebo reference="laser_head">
+  <gazebo reference="laser_link">
     <material>Gazebo/Red</material>
     <sensor type="ray" name="laser_sensor">
       <pose>0 0 0 0 0 0</pose>
@@ -91,7 +87,7 @@
           </horizontal>
         </scan>
         <range>
-          <min>0.05</min>
+          <min>0.20</min>
           <max>10.0</max>
         </range>
         <noise>
