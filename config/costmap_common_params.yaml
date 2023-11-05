@@ -52,4 +52,4 @@ obstacle_layer:
 
 # Map layer that adds a cushion in meters around obstacles
 inflation_layer:
-  inflation_radius: 0.15
+  inflation_radius: 0.25

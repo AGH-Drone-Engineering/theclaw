@@ -11,4 +11,5 @@
     <remap from="imu/data" to="/imu" />
     <remap from="pose_stamped" to="/scan_matcher/pose" />
   </node>
+  <node pkg="theclaw" type="pose2odom.py" name="pose2odom" />
 </launch>
