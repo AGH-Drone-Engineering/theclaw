@@ -26,14 +26,6 @@ publish_frequency: 5.0
 # Delay in transform tf data that is tolerable in seconds
 transform_tolerance: 0.2
 
-# Width of the map in meters
-width: 10
-
-# Height of the map in meters
-height: 10
-
-rolling_window: true
-
 subscribe_to_updates: true
 
 # Each costmap is layered
@@ -45,13 +37,13 @@ plugins:
 # Map layer built with SLAM
 static_layer:
   map_topic: /map
-  subscribe_to_updates: false
+  subscribe_to_updates: true
 
 # Map layer that contains information about the obstacles in the environment as detected by LIDAR
 obstacle_layer:
   observation_sources: laser_scan_sensor
-  laser_scan_sensor: {sensor_frame: laser_head, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+  laser_scan_sensor: {sensor_frame: laser_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
 
 # Map layer that adds a cushion in meters around obstacles
 inflation_layer:
-  inflation_radius: 0.15
+  inflation_radius: 0.1

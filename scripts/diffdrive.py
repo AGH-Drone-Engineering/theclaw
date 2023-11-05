@@ -31,10 +31,10 @@ def main():
         xl = fwd - turn
         xr = fwd + turn
 
-        left_float.data = xl
+        left_float.data = xl * 3
         left_int.data = clamp_byte(xl * 255)
 
-        right_float.data = xr
+        right_float.data = xr * 3
         right_int.data = clamp_byte(xr * 255)
 
         left_float_pub.publish(left_float)
