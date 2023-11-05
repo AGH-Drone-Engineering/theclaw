@@ -181,7 +181,11 @@ include_directories(
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
-catkin_install_python(PROGRAMS scripts/joycmd.py scripts/theclaw_node.py scripts/pose2odom.py
+catkin_install_python(PROGRAMS
+  scripts/joycmd.py
+  scripts/theclaw_node.py
+  scripts/pose2odom.py
+  scripts/diffdrive.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

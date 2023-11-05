@@ -67,11 +67,11 @@
     </xacro:macro>
 
     <xacro:wheel name="wheel_left">
-        <origin xyz="0 ${-0.050-0.017/2} 0" rpy="${pi/2} 0 0" />
+        <origin xyz="0 ${-0.050-0.017/2} 0" rpy="${-pi/2} 0 0" />
     </xacro:wheel>
 
     <xacro:wheel name="wheel_right">
-        <origin xyz="0 ${0.050+0.017/2} 0" rpy="${-pi/2} 0 0" />
+        <origin xyz="0 ${0.050+0.017/2} 0" rpy="${pi/2} 0 ${pi}" />
     </xacro:wheel>
 
     <!-- Skids -->
