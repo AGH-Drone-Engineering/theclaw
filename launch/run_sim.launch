@@ -6,7 +6,7 @@
   <remap from="/diffdrive_controller/cmd_vel" to="/cmd_vel" />
   <remap from="/diffdrive_controller/odom" to="/odom" />
 
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="diffdrive_controller joint_state_controller" />
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="diffdrive_controller gripper_arm_left_controller gripper_arm_right_controller joint_state_controller" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 

@@ -106,4 +106,51 @@
     <xacro:skid name="skid_rear">
         <origin xyz="-0.050 0 ${-0.040+0.010+0.001}" />
     </xacro:skid>
+
+    <!-- Gripper -->
+
+    <xacro:macro name="gripper_arm" params="name *origin">
+        <link name="${name}_link">
+            <visual>
+                <origin xyz="-0.065 0.095 -0.005" rpy="0 0 ${-pi/2}"/>
+                <geometry>
+                    <mesh filename="package://theclaw/urdf/meshes/gripper_arm.stl" scale="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="-0.065 0.095 -0.005" rpy="0 0 ${-pi/2}"/>
+                <geometry>
+                    <mesh filename="package://theclaw/urdf/meshes/gripper_arm.stl" scale="0.001 0.001 0.001" />
+                </geometry>
+            </collision>
+            <xacro:inertial_sphere mass="0.010" radius="0.050">
+                <origin xyz="0 0 0"/>
+            </xacro:inertial_sphere>
+        </link>
+        <joint name="${name}_joint" type="revolute">
+            <parent link="base_link" />
+            <child link="${name}_link" />
+            <xacro:insert_block name="origin" />
+            <axis xyz="0 0 1" />
+            <limit effort="0.07" velocity="1" lower="0" upper="1" />
+        </joint>
+        <transmission name="${name}_tran">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${name}_act">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+
+    <xacro:gripper_arm name="gripper_arm_left">
+        <origin xyz="0.100 0.015 0.0" rpy="${pi} 0 0.75" />
+    </xacro:gripper_arm>
+
+    <xacro:gripper_arm name="gripper_arm_right">
+        <origin xyz="0.100 -0.015 0.0" rpy="0 0 -0.75" />
+    </xacro:gripper_arm>
 </robot>

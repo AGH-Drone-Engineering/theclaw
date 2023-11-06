@@ -3,6 +3,7 @@
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
+from std_msgs.msg import Float64
 
 
 def threshold(x, low=0.05):
@@ -13,6 +14,8 @@ def main():
     rospy.init_node('joycmd')
 
     cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+    gripper_left_pub = rospy.Publisher('gripper_arm_left_controller/command', Float64, queue_size=1)
+    gripper_right_pub = rospy.Publisher('gripper_arm_right_controller/command', Float64, queue_size=1)
     last_msg = Twist()
 
     def on_joy(data: Joy):
@@ -24,7 +27,17 @@ def main():
         nonlocal last_msg
         last_msg = msg
 
-    rospy.Subscriber("joy", Joy, on_joy, queue_size=1)
+        msg_left = Float64()
+        msg_right = Float64()
+        gripper_trigger = data.axes[5]
+        if gripper_trigger > 0:
+            msg_left.data = msg_right.data = -1.0
+        else:
+            msg_left.data = msg_right.data = 1.0
+        gripper_left_pub.publish(msg_left)
+        gripper_right_pub.publish(msg_right)
+
+    rospy.Subscriber("joy", Joy, on_joy, queue_size=32)
 
     rate = rospy.Rate(50)
 
