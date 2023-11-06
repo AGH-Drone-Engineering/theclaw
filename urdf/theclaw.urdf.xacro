@@ -132,7 +132,7 @@
             <child link="${name}_link" />
             <xacro:insert_block name="origin" />
             <axis xyz="0 0 1" />
-            <limit effort="0.07" velocity="1" lower="0" upper="1" />
+            <limit effort="0.07" velocity="10" lower="0" upper="1" />
         </joint>
         <transmission name="${name}_tran">
             <type>transmission_interface/SimpleTransmission</type>
