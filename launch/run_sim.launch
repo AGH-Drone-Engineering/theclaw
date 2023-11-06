@@ -3,17 +3,12 @@
 
   <rosparam file="$(find theclaw)/config/theclaw_control.yaml" command="load" />
 
-  <node ns="/theclaw" name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="wheel_left_controller wheel_right_controller joint_state_controller" />
+  <remap from="/diffdrive_controller/cmd_vel" to="/cmd_vel" />
+  <remap from="/diffdrive_controller/odom" to="/odom" />
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-      <remap from="/joint_states" to="/theclaw/joint_states" />
-  </node>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="diffdrive_controller joint_state_controller" />
 
-  <node ns="/theclaw" pkg="theclaw" type="diffdrive.py" name="diffdrive">
-    <remap from="cmd_vel" to="/cmd_vel" />
-    <remap from="left/command/float" to="wheel_left_controller/command" />
-    <remap from="right/command/float" to="wheel_right_controller/command" />
-  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world" />

@@ -24,11 +24,11 @@
   </gazebo>
 
   <gazebo reference="wheel_left_link">
-    <material>Gazebo/Grass</material>
+    <material>Gazebo/Green</material>
   </gazebo>
 
   <gazebo reference="wheel_right_link">
-    <material>Gazebo/Grass</material>
+    <material>Gazebo/Red</material>
   </gazebo>
 
   <gazebo reference="camera_link">
@@ -105,7 +105,6 @@
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/theclaw</robotNamespace>
     </plugin>
   </gazebo>
 </robot>
