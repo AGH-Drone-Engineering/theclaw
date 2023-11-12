@@ -5,22 +5,9 @@
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
-  <node ns="motor_a" pkg="omniwheel" type="omniwheel_node" name="wheel1_controller">
-    <remap from="cmd_vel" to="/cmd_vel"/>
-    <remap from="command/int" to="motor_speed"/>
-    <param name="wheel_id" type="int" value="1"/>
-  </node>
-
-  <node ns="motor_b" pkg="omniwheel" type="omniwheel_node" name="wheel2_controller">
-    <remap from="cmd_vel" to="/cmd_vel"/>
-    <remap from="command/int" to="motor_speed"/>
-    <param name="wheel_id" type="int" value="2"/>
-  </node>
-
-  <node ns="motor_c" pkg="omniwheel" type="omniwheel_node" name="wheel3_controller">
-    <remap from="cmd_vel" to="/cmd_vel"/>
-    <remap from="command/int" to="motor_speed"/>
-    <param name="wheel_id" type="int" value="3"/>
+  <node name="diffdrive" pkg="theclaw" type="diffdrive.py">
+    <remap from="left/command/int" to="/motor_a/motor_speed"/>
+    <remap from="right/command/int" to="/motor_b/motor_speed"/>
   </node>
 
   <!-- <include file="$(find theclaw)/launch/lidar.launch" /> -->
