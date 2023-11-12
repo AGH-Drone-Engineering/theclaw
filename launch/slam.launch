@@ -1,10 +1,10 @@
 <launch>
-  <!-- <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox">
+  <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox">
     <rosparam command="load" file="$(find theclaw)/config/mapper_params_online_async.yaml" />
-  </node> -->
-  <include file="$(find hector_mapping)/launch/mapping_default.launch">
+  </node>
+  <!-- <include file="$(find hector_mapping)/launch/mapping_default.launch">
     <arg name="base_frame" default="base_link"/>
     <arg name="odom_frame" value="odom"/>
   </include>
-  <node name="odom_pub" pkg="tf" name="static_transform_publisher" args="0 0 0 0 0 0 map odom 50" />
+  <node name="odom_pub" pkg="tf" name="static_transform_publisher" args="0 0 0 0 0 0 map odom 50" /> -->
 </launch>

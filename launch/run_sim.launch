@@ -10,17 +10,20 @@
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    <rosparam command="load" file="$(find theclaw)/config/laser_config.yaml" />
+    <remap from="scan" to="scan_raw" />
+    <remap from="scan_filtered" to="scan" />
+  </node>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_stage_4.world" />
   </include>
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model theclaw -x -0.3 -y 0 -z 0.1 -param robot_description" />
 
-  <!-- <node pkg="theclaw" type="theclaw_node.py" name="theclaw" /> -->
-  <!-- <include file="$(find theclaw)/launch/lidar.launch" /> -->
-  <!-- <include file="$(find theclaw)/launch/scan_matcher.launch" /> -->
   <include file="$(find theclaw)/launch/nav.launch" />
   <include file="$(find theclaw)/launch/slam.launch" />
   <include file="$(find theclaw)/launch/rviz.launch" />
-  <!-- <include file="$(find theclaw)/launch/joystick.launch" /> -->
+  <include file="$(find theclaw)/launch/joystick.launch" />
 </launch>

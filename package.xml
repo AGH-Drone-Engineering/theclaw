@@ -10,27 +10,24 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   
-  <build_depend>rospy</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>nav_msgs</build_depend>
-  <build_depend>tf2_ros</build_depend>
-
-  <exec_depend>tf2_ros</exec_depend>
-  <exec_depend>joy</exec_depend>
-  <!-- <exec_depend>rplidar_ros</exec_depend> -->
-  <exec_depend>move_base</exec_depend>
-  <exec_depend>controller_manager</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <!-- <exec_depend>omniwheel</exec_depend> -->
-  <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>turtlebot3_gazebo</exec_depend>
-  <exec_depend>rviz</exec_depend>
-  <exec_depend>laser_scan_matcher</exec_depend>
-  <exec_depend>slam_toolbox</exec_depend>
-  <exec_depend>robot_localization</exec_depend>
-  <exec_depend>hector_mapping</exec_depend>
-
-  <export>
-  </export>
+  <depend>rospy</depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>joy</depend>
+  <!-- <depend>rplidar_ros</depend> -->
+  <depend>move_base</depend>
+  <depend>controller_manager</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>gazebo_ros</depend>
+  <depend>turtlebot3_gazebo</depend>
+  <depend>rviz</depend>
+  <depend>laser_scan_matcher</depend>
+  <depend>slam_toolbox</depend>
+  <depend>robot_localization</depend>
+  <depend>hector_mapping</depend>
+  <depend>hardware_interface</depend>
+  <depend>laser_filters</depend>
 </package>

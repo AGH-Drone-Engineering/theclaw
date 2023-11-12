@@ -3,10 +3,13 @@ project(theclaw)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  roscpp
   std_msgs
   geometry_msgs
   nav_msgs
   tf2_ros
+  hardware_interface
+  controller_manager
 )
 
 catkin_python_setup()
@@ -95,7 +98,7 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES doggy
 #  CATKIN_DEPENDS rospy std_msgs
-#  DEPENDS system_lib
+ DEPENDS roscpp hardware_interface controller_manager
 )
 
 ###########
@@ -138,6 +141,11 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+add_executable(hw_node src/hw.cpp)
+target_link_libraries(hw_node
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
