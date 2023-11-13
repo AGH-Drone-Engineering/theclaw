@@ -1,2 +1,12 @@
-global_costmap: 
+global_costmap:
+  plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+  static_layer:
+    subscribe_to_updates: true
+
+  inflation_layer:
+    inflation_radius: 0.15
+
   global_frame: map
