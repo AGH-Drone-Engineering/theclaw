@@ -6,14 +6,12 @@
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
   <node name="diffdrive" pkg="theclaw" type="diffdrive.py">
-    <remap from="left/command/int" to="/motor_a/motor_speed"/>
-    <remap from="right/command/int" to="/motor_b/motor_speed"/>
+    <remap from="left/command/int" to="/hw/motor_a/command"/>
+    <remap from="right/command/int" to="/hw/motor_b/command"/>
   </node>
 
-  <include file="$(find theclaw)/launch/lidar.launch" />
-  <!-- <include file="$(find theclaw)/launch/scan_matcher.launch" /> -->
   <include file="$(find theclaw)/launch/nav.launch" />
   <include file="$(find theclaw)/launch/slam.launch" />
-  <!-- <include file="$(find theclaw)/launch/rviz.launch" /> -->
-  <!-- <include file="$(find theclaw)/launch/joystick.launch" /> -->
+  <include file="$(find theclaw)/launch/rviz.launch" />
+  <include file="$(find theclaw)/launch/joystick.launch" />
 </launch>

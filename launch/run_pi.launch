@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find theclaw)/launch/lidar.launch" />
+  <node ns="hw" name="rosserial" pkg="rosserial_python" type="serial_node.py" output="screen">
+    <param name="port" value="/dev/ttyACM0"/>
+    <param name="baud" value="115200"/>
+</launch>
