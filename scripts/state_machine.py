@@ -83,6 +83,15 @@ class StateMachine:
         print("Uciekaj!")
         goHome()
         return None
+        
+    def callback(self, data):
+        # rospy.loginfo("Otrzymano: %d", data.data)  # Wyświetlenie odebranej wiadomości
+        # Tutaj umieść logikę obsługi odebranej wiadomości (np. zmiana flagi bear_found)
+        if data.data == 1:  
+            teddy_msg = Int32()
+            teddy_msg.data = self.CURRENT_STATE
+            self.teddy_pub.publish(teddy_msg)
+
 
 if __name__ == "__main__":
     state_machine = StateMachine()
