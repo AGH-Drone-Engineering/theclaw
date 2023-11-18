@@ -1,7 +1,20 @@
 <launch>
+  <param name="robot_description" command="xacro '$(find theclaw)/urdf/theclaw.urdf.xacro'" />
+  <rosparam file="$(find theclaw)/config/theclaw_control.yaml" command="load" />
+
   <include file="$(find theclaw)/launch/lidar.launch" />
+  
   <node ns="hw" name="rosserial" pkg="rosserial_python" type="serial_node.py" output="screen">
     <param name="port" value="/dev/ttyACM0"/>
     <param name="baud" value="115200"/>
   </node>
+  
+  <node name="theclaw_hw" pkg="theclaw" type="hw_node" />
+  
+  <remap from="/diffdrive_controller/cmd_vel" to="/cmd_vel" />
+  <remap from="/diffdrive_controller/odom" to="/odom" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="diffdrive_controller joint_state_controller" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 </launch>

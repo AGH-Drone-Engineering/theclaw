@@ -12,6 +12,7 @@
 
 static double parsePosition(int32_t ticks)
 {
+  ticks = ticks % TICKS_PER_REVOLUTION;
   double radians = ((double) ticks) / ((double) TICKS_PER_REVOLUTION) * 2.0 * M_PI;
   radians = fmod(radians, 2.0 * M_PI);
   if (radians < 0.0)
@@ -47,23 +48,25 @@ class MyRobot : public hardware_interface::RobotHW
 public:
   MyRobot(ros::NodeHandle &nh)
   : _nh(nh)
-  , _hw_motor_a_cmd_pub(nh.advertise<std_msgs::Int16>("hw/motor_a_cmd", 1))
-  , _hw_motor_b_cmd_pub(nh.advertise<std_msgs::Int16>("hw/motor_b_cmd", 1))
-  , _hw_motor_a_pos_sub(nh.subscribe("hw/motor_a_pos", 1, &MyRobot::motor_a_pos_cb, this))
-  , _hw_motor_a_vel_sub(nh.subscribe("hw/motor_a_vel", 1, &MyRobot::motor_a_vel_cb, this))
+  , _hw_motor_a_cmd_pub(nh.advertise<std_msgs::Int16>("hw/motor_a/command", 1))
+  , _hw_motor_b_cmd_pub(nh.advertise<std_msgs::Int16>("hw/motor_b/command", 1))
+  , _hw_motor_a_pos_sub(nh.subscribe("hw/motor_a/position", 1, &MyRobot::motor_a_pos_cb, this))
+  , _hw_motor_a_vel_sub(nh.subscribe("hw/motor_a/velocity", 1, &MyRobot::motor_a_vel_cb, this))
+  , _hw_motor_b_pos_sub(nh.subscribe("hw/motor_b/position", 1, &MyRobot::motor_b_pos_cb, this))
+  , _hw_motor_b_vel_sub(nh.subscribe("hw/motor_b/velocity", 1, &MyRobot::motor_b_vel_cb, this))
   {
-    hardware_interface::JointStateHandle state_handle_a("wheel_a", &_pos[0], &_vel[0], &_eff[0]);
+    hardware_interface::JointStateHandle state_handle_a("wheel_left_joint", &_pos[0], &_vel[0], &_eff[0]);
     _jnt_state_interface.registerHandle(state_handle_a);
 
-    hardware_interface::JointStateHandle state_handle_b("wheel_b", &_pos[1], &_vel[1], &_eff[1]);
+    hardware_interface::JointStateHandle state_handle_b("wheel_right_joint", &_pos[1], &_vel[1], &_eff[1]);
     _jnt_state_interface.registerHandle(state_handle_b);
 
     registerInterface(&_jnt_state_interface);
 
-    hardware_interface::JointHandle vel_handle_a(_jnt_state_interface.getHandle("wheel_a"), &_cmd[0]);
+    hardware_interface::JointHandle vel_handle_a(_jnt_state_interface.getHandle("wheel_left_joint"), &_cmd[0]);
     _jnt_vel_interface.registerHandle(vel_handle_a);
 
-    hardware_interface::JointHandle vel_handle_b(_jnt_state_interface.getHandle("wheel_b"), &_cmd[1]);
+    hardware_interface::JointHandle vel_handle_b(_jnt_state_interface.getHandle("wheel_right_joint"), &_cmd[1]);
     _jnt_vel_interface.registerHandle(vel_handle_b);
 
     registerInterface(&_jnt_vel_interface);
