@@ -8,7 +8,9 @@
     <param name="port" value="/dev/ttyACM0"/>
     <param name="baud" value="115200"/>
   </node>
-  
+
+  <node name="camera_publisher" pkg="theclaw" type="camera_pub.py"/>
+
   <node name="theclaw_hw" pkg="theclaw" type="hw_node" />
   
   <remap from="/diffdrive_controller/cmd_vel" to="/cmd_vel" />
