@@ -7,7 +7,9 @@
   <node ns="hw" name="rosserial" pkg="rosserial_python" type="serial_node.py" output="screen">
     <param name="port" value="/dev/ttyACM0"/>
   </node>
-  
+
+  <node name="camera_publisher" pkg="theclaw" type="camera_pub.py"/>
+
   <node name="theclaw_hw" pkg="theclaw" type="hw_node" />
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="diffdrive_controller joint_state_controller" />
