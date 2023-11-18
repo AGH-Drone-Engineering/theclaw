@@ -3,11 +3,11 @@
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
-from std_msgs.msg import UInt8
+from std_msgs.msg import UInt8 
 
 
-SERVO_OPEN = 10
-SERVO_CLOSE = 70
+SERVO_OPEN = 0
+SERVO_CLOSE = 60
 
 
 def threshold(x, low=0.05):
@@ -21,15 +21,15 @@ def rescale(x, fromlo, fromhi, tolo, tohi):
 def main():
     rospy.init_node('joycmd')
 
-    cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
-    gripper_pub = rospy.Publisher('hw/gripper/command', UInt8, queue_size=1)
+    cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=8)
+    gripper_pub = rospy.Publisher('hw/gripper/command', UInt8, queue_size=8)
     last_msg = Twist()
 
     def on_joy(data: Joy):
         rospy.logdebug(rospy.get_caller_id() + f"[joy] {data.axes}")
         msg = Twist()
-        msg.linear.x = threshold(data.axes[1])
-        msg.angular.z = threshold(data.axes[3])
+        msg.linear.x = threshold(data.axes[1]) * 1
+        msg.angular.z = threshold(data.axes[3]) * 5
         cmd_vel_pub.publish(msg)
         nonlocal last_msg
         last_msg = msg

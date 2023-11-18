@@ -1,4 +1,6 @@
 <launch>
-  <node pkg="theclaw" type="joycmd.py" name="joycmd" />
+  <node pkg="theclaw" type="joycmd.py" name="joycmd">
+    <remap from="cmd_vel" to="diffdrive_controller/cmd_vel" />
+  </node>
   <node pkg="joy" type="joy_node" name="joy_node" />
 </launch>
